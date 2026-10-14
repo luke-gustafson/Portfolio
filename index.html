@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luke Gustafson Portfolio</title>
+<meta name="description" content="Luke Gustafson, mechanical engineering student at Villanova University. Composites manufacturing, aerodynamics, thermal-fluid design and tooling.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112..125,600..800&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout concept: each piece of work is a drawing sheet. A title block carries the metadata
+   (role, org, period, tools), figures sit in a measured grid, the home page is the drawing index. */
+:root {
+  --paper: #eef1f4;      /* cool drafting-film grey */
+  --sheet: #f9fafb;      /* raised surface */
+  --ink: #111921;
+  --ink-2: #4a5663;
+  --rule: #cdd4db;
+  --accent: #1f47c7;     /* anodized cobalt */
+  --accent-ink: #ffffff;
+  --hatch: #dfe4e9;
+  --display: "Archivo", "Arial Narrow", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --step--1: 0.8125rem; --step-0: 1rem; --step-1: 1.1875rem; --step-2: 1.5rem; --step-3: 2.125rem; --step-4: clamp(2.6rem, 7vw, 5rem);
+  --wrap: 1180px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0d1217; --sheet: #141b22; --ink: #e5eaef; --ink-2: #9aa7b4; --rule: #27313b;
+    --accent: #86a2ff; --accent-ink: #0d1217; --hatch: #1c252e; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0d1217; --sheet: #141b22; --ink: #e5eaef; --ink-2: #9aa7b4; --rule: #27313b;
+  --accent: #86a2ff; --accent-ink: #0d1217; --hatch: #1c252e; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; animation: none !important; } }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: var(--step-0); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { font-family: var(--display); font-stretch: 118%; line-height: 1.08; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+p { margin: 0; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.label { font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+
+/* Header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; }
+.mark { font-family: var(--display); font-stretch: 125%; font-weight: 800; font-size: 1.05rem; color: var(--ink); text-decoration: none; letter-spacing: 0.01em; white-space: nowrap; }
+.mark span { color: var(--accent); }
+.nav { display: flex; gap: 4px 20px; flex-wrap: wrap; justify-content: flex-end; }
+.nav a { font-family: var(--mono); font-size: 0.8125rem; color: var(--ink-2); text-decoration: none; letter-spacing: 0.04em; }
+.nav a:hover { color: var(--ink); }
+
+/* Hero */
+.hero { padding-block: 56px 48px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 48px; align-items: end; }
+.hero h1 { font-size: var(--step-4); font-weight: 800; font-stretch: 125%; letter-spacing: -0.02em; }
+.hero .lede { font-size: var(--step-1); color: var(--ink-2); max-width: 36em; margin-top: 20px; }
+.hero .lede strong { color: var(--ink); font-weight: 600; }
+.hero-meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-top: 32px; border: 1px solid var(--rule); background: var(--sheet); }
+.hero-meta div { padding: 12px 14px; border-right: 1px solid var(--rule); min-width: 0; }
+.hero-meta div:last-child { border-right: 0; }
+.hero-meta b { display: block; font-weight: 500; font-size: 0.9375rem; margin-top: 2px; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.04em; padding: 10px 16px; border: 1px solid var(--ink); color: var(--ink); background: transparent; text-decoration: none; cursor: pointer; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn:hover { transform: translateY(-1px); }
+.portrait { margin: 0; }
+
+/* Figures, with a hatched frame when a photo is not yet on disk */
+figure { margin: 0; min-width: 0; }
+.frame { position: relative; background: var(--hatch); border: 1px solid var(--rule); overflow: hidden; }
+.frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* A photo whose shape differs from its slot is shown whole on a white plate, never cropped */
+.frame.whole { background: #ffffff; }
+.frame.whole img { object-fit: contain; padding: 7%; }
+.frame.missing { background: repeating-linear-gradient(135deg, var(--hatch) 0 8px, transparent 8px 16px), var(--sheet); }
+.frame.missing img { display: none; }
+.frame.missing::after { content: attr(data-alt); position: absolute; inset: auto 10px 10px 10px; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+figcaption { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-2); margin-top: 8px; letter-spacing: 0.02em; }
+/* Figure rows: every photo keeps its own aspect ratio; widths follow the ratio so a row shares one height */
+.frows { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+.frow { display: flex; gap: 16px; align-items: flex-start; min-width: 0; }
+.frow > figure { flex: var(--r) var(--r) 0; }
+.frow > figure:only-child { flex: none; width: 100%; max-width: calc(var(--r) * 56vh); }
+.frow .frame, .hero-fig .frame { cursor: zoom-in; }
+/* Lightbox: any project photo opens full size */
+.lightbox { position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px; background: rgb(10 14 20 / 0.92); cursor: zoom-out; }
+.lightbox[hidden] { display: none; }
+.lightbox img { max-width: 100%; max-height: calc(100vh - 96px); object-fit: contain; }
+.lightbox p { font-family: var(--mono); font-size: 0.8125rem; color: #e6e9ee; margin: 0; text-align: center; }
+
+/* Sections */
+section.block { padding-block: 56px; border-top: 1px solid var(--rule); }
+.sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+.sec-head h2 { font-size: var(--step-3); font-weight: 750; }
+
+/* Work index */
+.group + .group { margin-top: 40px; }
+.group > .label { display: block; padding-bottom: 10px; border-bottom: 1px solid var(--rule); margin-bottom: 20px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 24px; }
+.card { display: flex; flex-direction: column; gap: 14px; color: inherit; text-decoration: none; min-width: 0; }
+.card .frame { transition: border-color .2s; }
+.card:hover .frame { border-color: var(--accent); }
+.card:hover h3 { color: var(--accent); }
+.card h3 { font-size: var(--step-2); font-weight: 700; transition: color .2s; }
+.card .role { font-size: 0.9375rem; color: var(--ink-2); }
+.card .fig { display: flex; gap: 10px; align-items: baseline; border-top: 1px dashed var(--rule); padding-top: 10px; margin-top: auto; }
+.card .fig b { font-family: var(--display); font-stretch: 112%; font-size: var(--step-1); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.card .fig span { font-size: 0.875rem; color: var(--ink-2); }
+
+/* Skills */
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.skill-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.skill-list li { display: grid; grid-template-columns: minmax(0, 11em) minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+.skill-list b { font-weight: 600; }
+.skill-list span { color: var(--ink-2); font-size: 0.9375rem; }
+.skills h3 { font-size: var(--step-1); margin-bottom: 12px; font-weight: 700; }
+
+/* Resume + contact */
+.resume-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 40px; align-items: start; }
+.contact { background: var(--ink); color: var(--paper); }
+.contact .wrap { padding-block: 64px; display: flex; flex-wrap: wrap; gap: 24px; align-items: end; justify-content: space-between; }
+.contact h2 { font-size: var(--step-3); color: var(--paper); }
+.contact .label { color: color-mix(in srgb, var(--paper) 65%, var(--ink)); }
+.email { font-family: var(--mono); font-size: var(--step-1); color: var(--paper); user-select: all; word-break: break-all; }
+.contact .btn { border-color: var(--paper); color: var(--paper); }
+footer { padding-block: 24px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+/* Resume */
+.cv { display: grid; grid-template-columns: minmax(0, 12em) minmax(0, 1fr); gap: 0 32px; }
+.cv h3 { font-family: var(--mono); font-stretch: 100%; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); padding-top: 18px; border-top: 1.5px solid var(--ink); }
+.cv .entries { border-top: 1.5px solid var(--ink); }
+.cv .entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 24px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.cv .entry b { font-weight: 600; }
+.cv .entry .when { font-family: var(--mono); font-size: 0.8125rem; color: var(--ink-2); text-align: right; white-space: nowrap; }
+.cv .entry .role { color: var(--ink-2); }
+.cv .entry ul { grid-column: 1 / -1; margin: 8px 0 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; font-size: 0.9375rem; max-width: 70ch; }
+.cv .entry li::marker { color: var(--accent); }
+.cv .entry a.more { grid-column: 1 / -1; font-family: var(--mono); font-size: 0.75rem; margin-top: 6px; text-decoration: none; }
+.cv > :nth-child(n+3) { margin-top: 32px; }
+
+/* Project sheet */
+.sheet-head { padding-block: 40px 32px; }
+.crumb { font-family: var(--mono); font-size: 0.8125rem; text-decoration: none; color: var(--ink-2); }
+.crumb:hover { color: var(--accent); }
+.sheet-head h1 { font-size: clamp(2.1rem, 5.5vw, 3.75rem); font-weight: 800; margin-top: 18px; }
+.sheet-head .summary { font-size: var(--step-1); color: var(--ink-2); max-width: 40em; margin-top: 16px; }
+.titleblock { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1.5px solid var(--ink); margin-top: 28px; background: var(--sheet); }
+.titleblock > div { padding: 10px 14px; border-right: 1px solid var(--ink); min-width: 0; }
+.titleblock > div:last-child { border-right: 0; }
+.titleblock b { display: block; font-weight: 500; font-size: 0.9375rem; margin-top: 2px; }
+/* Project hero: upright photos sit beside the title; wide ones run full width. Neither is cropped. */
+.sheet-top.side { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 48px; align-items: end; padding-block: 40px 0; }
+.sheet-top.side .sheet-head { padding-block: 0; }
+.sheet-top.side .titleblock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sheet-top.side .titleblock > div:nth-child(2n) { border-right: 0; }
+.sheet-top.side .titleblock > div:nth-child(-n+2) { border-bottom: 1px solid var(--ink); }
+.hero-fig { width: 100%; max-width: calc(var(--r) * 72vh); }
+.sheet-top.side .hero-fig { justify-self: end; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); border-top: 1.5px solid var(--ink); border-bottom: 1px solid var(--rule); margin-top: 40px; }
+.stats div { padding: 16px 16px 16px 0; min-width: 0; }
+.stats b { display: block; font-family: var(--display); font-stretch: 112%; font-size: var(--step-3); font-weight: 750; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.stats span { font-size: 0.875rem; color: var(--ink-2); }
+.part { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 40px; padding-block: 48px; border-top: 1px solid var(--rule); }
+.part:first-of-type { border-top: 0; }
+.part h2 { font-size: var(--step-2); font-weight: 700; }
+.part .text { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.part .text p, .part .text li { max-width: 62ch; }
+.part ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 6px; }
+.part li::marker { color: var(--accent); }
+.part.nofig { grid-template-columns: minmax(0, 1fr); }
+.part.nofig .text { max-width: 760px; }
+.frame.fit { background: #ffffff; }
+.frame.fit img { object-fit: contain; }
+.sub { border-left: 2px solid var(--accent); padding-left: 14px; }
+.sub h3 { font-family: var(--body); font-stretch: 100%; font-size: var(--step-0); font-weight: 600; margin-bottom: 4px; }
+.spec { width: 100%; border-collapse: collapse; font-size: 0.9375rem; }
+.spec th, .spec td { text-align: left; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.spec th { font-family: var(--mono); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.spec td.num { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; }
+.table-wrap { overflow-x: auto; }
+.doc { text-decoration: none; align-self: flex-start; display: flex; gap: 10px; align-items: center; font-family: var(--mono); font-size: 0.8125rem; color: var(--ink-2); border: 1px dashed var(--rule); padding: 8px 12px; }
+.doc:hover { color: var(--accent); border-color: var(--accent); }
+.doc::before { content: "PDF"; font-size: 0.6875rem; border: 1px solid var(--ink-2); padding: 1px 4px; }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding-block: 32px 56px; border-top: 1.5px solid var(--ink); }
+.pager a { text-decoration: none; color: var(--ink); display: flex; flex-direction: column; gap: 4px; }
+.pager a:last-child { text-align: right; }
+.pager a b { font-family: var(--display); font-stretch: 112%; font-size: var(--step-1); }
+.pager a:hover b { color: var(--accent); }
+.video { display: flex; gap: 16px; align-items: center; justify-content: space-between; flex-wrap: wrap; border: 1.5px solid var(--ink); padding: 18px 20px; background: var(--sheet); }
+
+@media (max-width: 860px) {
+  .hero-grid, .resume-grid, .skills, .part { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .hero { padding-block: 32px 40px; }
+  .portrait { max-width: 420px; }
+  .sheet-top.side { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .sheet-top.side .hero-fig { justify-self: start; }
+  .titleblock { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .titleblock > div:nth-child(2) { border-right: 0; }
+  .titleblock > div:nth-child(-n+2) { border-bottom: 1px solid var(--ink); }
+}
+@media (max-width: 520px) {
+  .hero-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero-meta div:nth-child(2) { border-right: 0; }
+  .hero-meta div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); }
+  .frow { flex-direction: column; }
+  .frow > figure { flex: none; width: 100%; }
+  .cv { grid-template-columns: minmax(0, 1fr); }
+  .cv .entries { border-top: 0; }
+  .cv > :nth-child(n+3) { margin-top: 0; }
+  .cv > h3:not(:first-child) { margin-top: 32px; }
+  .cv .entry { grid-template-columns: minmax(0, 1fr); }
+  .cv .entry .when { text-align: left; }
+  .skill-list li { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nav { gap: 2px 14px; }
+}
+.view[hidden] { display: none !important; }
+.enter { animation: rise .45s ease-out both; }
+@keyframes rise { from { opacity: .4; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top">LUKE GUSTAFSON<span>.</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#resume">Resume</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="home" class="view">
+  <div class="hero wrap" id="top">
+    <div class="hero-grid">
+      <div>
+        <p class="label">Mechanical Engineering · Villanova University</p>
+        <h1 style="margin-top:14px">Luke Gustafson</h1>
+        <p class="lede">Senior in Mechanical Engineering. I lead composites manufacturing for the <strong>Villanova Formula SAE</strong> aero package, interned in manufacturing engineering at <strong>Lockheed Martin</strong>, and focus my coursework on thermal-fluid systems.</p>
+        <div class="hero-meta">
+          <div><span class="label">Graduating</span><b>May 2027</b></div>
+          <div><span class="label">GPA</span><b>3.91 · Dean's List</b></div>
+          <div><span class="label">Minors</span><b>Aerospace Engineering, Business</b></div>
+          <div><span class="label">Concentration</span><b>Thermal-Fluid Systems</b></div>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="#work">See the work</a>
+          <a class="btn" href="#resume">Resume</a>
+        </div>
+      </div>
+      <figure class="portrait">
+        <div class="frame" style="aspect-ratio:0.9343" data-alt="Portrait"><img src="images/home-portrait.jpg" alt="Luke Gustafson"></div>
+        <figcaption>Brooklyn, NY · B.S. Mechanical Engineering, Villanova</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="sec-head"><h2>Selected work</h2><span class="label" id="work-count"></span></div>
+      <div id="index"></div>
+    </div>
+  </section>
+
+  <section class="block" id="skills">
+    <div class="wrap">
+      <div class="sec-head"><h2>Skills</h2><span class="label">Software and shop</span></div>
+      <div class="skills" id="skills-grid"></div>
+    </div>
+  </section>
+
+  <section class="block" id="resume">
+    <div class="wrap">
+      <div class="sec-head"><h2>Resume</h2><span class="label">Updated summer 2026</span></div>
+      <div class="cv" id="cv"></div>
+    </div>
+  </section>
+</main>
+
+<main id="project" class="view" hidden></main>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <p class="label">Open to full-time roles in aerospace, defense and motorsports</p>
+      <h2 style="margin-top:10px">Get in touch</h2>
+      <p class="email" id="email" style="margin-top:12px">LukeG482@gmail.com</p>
+    </div>
+    <div class="cta" style="margin-top:0">
+      <button class="btn" id="copy" type="button">Copy email</button>
+      <a class="btn" href="mailto:LukeG482@gmail.com">Send email</a>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="lightbox" hidden><img alt=""><p></p></div>
+<footer><div class="wrap"><span class="label">© 2026 Luke Gustafson</span><a class="label" href="#top" style="text-decoration:none">Back to top</a></div></footer>
+
+<script>
+// Shared portfolio content. Every design inlines this at build time (build.py).
+// figs entries: [image file in images/, caption, options]. Options: "wide" spans the row,
+// "fit" shows the whole image (charts, CAD, drawings) instead of cropping it.
+const PROJECTS = [
+  { id: "lockheed-martin", group: "Experience",
+    title: "Lockheed Martin", short: "Lockheed Martin",
+    role: "Manufacturing Engineering Intern, Missiles and Fire Control",
+    img: "lockheed-hero", hero: "lockheed-hero", cap: "Lockheed Martin MFC, Archbald, PA",
+    figure: ["−40%", "torque application time"],
+    block: [["Company", "Lockheed Martin MFC"], ["Role", "Manufacturing Eng. Intern"], ["Period", "Jun – Aug 2026"], ["Location", "Archbald, PA"]],
+    summary: "I designed fixtures, tooling and handling equipment that took time and defects out of production assembly, taking each from a Creo model through printed prototypes and iteration.",
+    stats: [["−33%", "riveting time"], ["−40%", "torque application time"], ["3×", "wash rack load capacity"], ["−25%", "soldering time"]],
+    parts: [
+      { h: "Results", figs: [], body: `
+        <div class="table-wrap"><table class="spec">
+          <thead><tr><th>Project</th><th>What I did</th><th>Result</th></tr></thead>
+          <tbody>
+            <tr><td>Riveting fixture</td><td>Designed in Creo and printed by stereolithography for a slender heat sensor bracket. Improved nut plate alignment and stopped rivets dropping out from part flexure.</td><td class="num">−33% time</td></tr>
+            <tr><td>Torque wrench attachment</td><td>For a thin-walled cable connector assembly. Eliminated coating scratches, part deformation and uneven torque.</td><td class="num">−40% time</td></tr>
+            <tr><td>Product washing rack</td><td>Held parts more securely through high-pressure wash cycles, simplified moving racks around the site and extended rack life.</td><td class="num">3× capacity</td></tr>
+            <tr><td>Soldering vise jaws</td><td>Designed, iterated and 3D printed custom jaws that clamp two parts securely and set a precise joint angle.</td><td class="num">−25% time</td></tr>
+          </tbody></table></div>` }
+    ] },
+
+  { id: "formula-sae", group: "Experience",
+    title: "Villanova Formula SAE", short: "Formula SAE: NovaRacing",
+    role: "Aerodynamics Manufacturing Engineer and VU17 test driver",
+    img: "fsae-hero", hero: "banner-formula-sae", cap: "NovaRacing at competition",
+    figure: ["35+", "aero elements laid up across VU16 and VU17"],
+    block: [["Team", "NovaRacing"], ["Role", "Aero manufacturing, test driver"], ["Period", "Dec 2024 – present"], ["Tools", "SolidWorks, ANSYS, Aspire"]],
+    summary: "I run composites manufacturing for the car's aero package, from mold prep and CNC routing through layup, cure, demolding, post-processing and final assembly. I also design and analyze parts in SolidWorks and ANSYS, and I'm one of the VU17 test drivers.",
+    stats: [["35+", "aero elements laid up"], ["25", "molds toolpathed in Aspire"], ["2,000 N", "VU17 downforce target"], ["1st", "season with exposed Blue Carbon"]],
+    parts: [
+      { h: "VU17 aero package", figs: [["fsae-undertray", "VU17 with the full aero package", "wide"], ["fsae-vu17", "Laying up carbon for VU17"], ["fsae-hero", "In the car, VU16"]], body: `
+        <p>VU17 was a season of firsts for the aero group, and I was responsible for turning the designs into carbon parts on a compressed schedule.</p>
+        <ul><li>First season using exposed Blue Carbon on the car</li><li>First time the team used MDF for molds</li><li>More resin infusion layups than any previous season</li><li>Accurate post-processing under real time pressure</li></ul>` },
+      { h: "Mold preparation", figs: [["fsae-mold-prep", "Early resin and vacuum bonding trial"], ["fsae-mdf", "Undertray mold toolpath in Aspire", "fit"], ["fsae-toolpath", "Running the CNC router", "wide"]], body: `
+        <p>We first tried bonding mold stock with resin under vacuum, then switched to MDF glued with wood glue, which was faster and held up well on the router.</p>
+        <ul><li>Programmed toolpaths in Aspire for 8 body panel, 13 undertray and 4 wing molds, about 2 hours each</li><li>Routed with a 1/2" roughing end mill, then finished with a 12 mm ball nose</li><li>Sealed and assembled molds with a polyurethane coating and spackle</li></ul>` },
+      { h: "Layups", figs: [["fsae-layup", "Undertray foam core under vacuum"], ["fsae-foam-core", "Front wing wet layup under vacuum"], ["fsae-cnc", "Preparing a layup"], ["fsae-fw-layup", "Nosecone resin infusion"]], body: `
+        <ul><li>Added a foam core to the undertray for stiffness</li><li>Used wet layups for most parts. PLA molds limited vacuum to about 550 mmHg</li><li>Ran the nosecone as a resin infusion. Switching to gravity-assisted flow fixed a clogging problem that had cost us more than a day</li></ul>` },
+      { h: "Post-processing and assembly", figs: [["fsae-post", "Front wing, assembled", "wide"], ["fsae-fw-assembly", "Rear wing, assembled"], ["fsae-rw-assembly", "Undertray, trimmed"]], body: `
+        <div class="sub"><h3>Front wing</h3><p>Heat-set inserts, PLA and carbon ribs, and turned spacers.</p></div>
+        <div class="sub"><h3>Rear wing</h3><p>A 1:1 printed template located the endplates. Swan necks were fitted by hand with a Dremel.</p></div>
+        <div class="sub"><h3>Undertray</h3><p>Riveted along the flanges and attached with metal zip ties.</p></div>
+        <div class="sub"><h3>Full car</h3><p>Added wire cables to stiffen the package at speed.</p></div>` },
+      { h: "Lessons learned", figs: [], body: `
+        <ul><li>Set measurable targets up front: tensile strength, surface finish, and the grit used before mold release</li><li>Mark rib and hole locations directly on the molds</li><li>Use dowels or pins to align multi-piece molds</li><li>Plan body panels as separate sections so they're easier to access</li><li>Start earlier. The team began two months late this season</li></ul>` },
+      { h: "VU16", figs: [["fsae-vu16", "VU16 rear wing"], ["fsae-vu16-rw", "VU16 cooling shroud"], ["fsae-shroud", "VU16 front wing"], ["fsae-vu16-fw", "Front wing mount detail"], ["fsae-vu16-fw-2", "Layup materials"]], body: `
+        <div class="sub"><h3>Rear wing</h3><p>Four airfoils and two endplates laid up in MDF molds, with aluminum end ribs.</p></div>
+        <div class="sub"><h3>Cooling shrouds</h3><p>Four carbon shrouds for two radiators, laid up over foam male molds. The foam was burned out after cure.</p></div>
+        <div class="sub"><h3>Front wing</h3><p>A multi-element airfoil with two endplates and vortex generators.</p></div>` },
+      { h: "Front wing design and CFD", figs: [["fsae-vu17-fw-cad", "VU17 front wing in SolidWorks", "fit"], ["fsae-vu17-fw-cad-2", "Front wing CFD streamlines", "fit"]], body: `
+        <p>I developed front wing concepts for VU17 in SolidWorks and refined them from CFD results, evaluating lift and drag against the team's 2,000 N total downforce target.</p>` },
+      { h: "Engine sprocket", figs: [["fsae-sprocket", "36-tooth sprocket", "fit"], ["fsae-cfd", "Total deformation", "fit"], ["fsae-cfd-2", "Von Mises stress", "fit"]], body: `
+        <p>A 36-tooth sprocket designed for a 2,600 N tooth load, with lightening holes checked for deformation and stress in ANSYS.</p>` },
+      { h: "Suspension rocker", figs: [["fsae-rocker-1", "Rocker in SolidWorks", "fit"], ["fsae-rocker-2", "Total deformation", "fit"], ["fsae-rocker-3", "Von Mises stress", "fit"]], body: `
+        <p>A 7075-T6 aluminum rocker with three targets: under 75 g, under 1 mm of deformation, and a factor of safety above 1.5.</p>` },
+      { h: "Steering wheel", figs: [["fsae-rocker-4", "Steering wheel render", "fit"], ["fsae-steering", "Steering wheel drawing", "fit"]], body: `
+        <p>Designed for driver ergonomics, ease of manufacturing and enough stiffness to pass technical inspection.</p>` },
+      { h: "Next: VU18 aero redesign", figs: [], body: `
+        <p>I'm planning a ground-up redesign of the aero package for VU18 in response to the 2027 FSAE rule changes on rear wing height, front wing limits and a new variable keep-out zone. I've proposed bringing nTop into the team's workflow to replace a fragmented SolidWorks-to-ANSYS/Star-CCM+ pipeline with parametric geometry sweeps, and I'm leading nTop onboarding ahead of the Fall 2026 design phase.</p>` },
+      { h: "Driver tryouts", figs: [], body: `
+        <p>Footage from my second time driving the car.</p>
+        <div class="video"><span class="label">Video · YouTube</span><a class="btn primary" href="https://www.youtube.com/watch?v=oI9S_HyGcLI" target="_blank" rel="noopener">Watch the run</a></div>` }
+    ] },
+
+  { id: "bio-inspired-robotics", group: "Experience",
+    title: "Bio-Inspired Robotics", short: "Bio-Inspired Robotics",
+    role: "Hardware Research Assistant, Villanova College of Engineering",
+    img: "home-bio", hero: "banner-bio-inspired-robotics", cap: "Snake jaw mechanism",
+    figure: ["12", "quadrate assemblies built"],
+    block: [["Type", "Research"], ["Role", "Hardware Research Assistant"], ["Period", "Aug 2025 – Jan 2026"], ["Tools", "3D printing, PVC, electronics"]],
+    summary: "Our three-person team built five bio-inspired snake jaw mechanisms for teaching, then put them in classrooms to study how interactive robots affect STEM learning. I handled much of the mechanical build and wrote the mechanical section of the replication manual in Overleaf so the design can be reproduced and scaled.",
+    stats: [["5", "snake jaw robots"], ["12", "quadrate assemblies"], ["3", "PVC stands"]],
+    parts: [
+      { h: "Educational snake jaw robot", figs: [["bio-hero", "Completed robot on its electronics base"], ["banner-resume", "Printed jaw and skull components", "wide fit"]], body: `
+        <ul><li>Fabricated PVC bases and 3D printed the bodywork</li><li>Assembled the jaws to mimic the biomechanical motion of a snake</li><li>Placed resistors and wiring in a magnetically fastened assembly</li><li>Wrote the mechanical section of the replication manual</li></ul>` },
+      { h: "Quadrate assembly", figs: [["bio-jaw", "Quadrate with magnets and servo"]], body: `
+        <p>The quadrate is the hinge bone that connects a snake's skull to its lower jaw. We built 12 of them, mostly from 3D printed parts, each combining magnets, a resistor and wiring, with a servo providing controlled rotation.</p>
+        <p>Placing the magnets and wires by hand gave inconsistent results. A fixture would have been the better approach, which is a lesson in process improvement I took from Lockheed Martin.</p>` },
+      { h: "PVC stand assembly", figs: [["bio-quadrate", "Cutting PVC posts and the finished stands", "wide"]], body: `
+        <p>For three of the snake models I cut and drilled PVC posts to hold the skull, then painted them. The posts mount to an acrylic electronics base, and the skull's main wiring runs through the central pipe.</p>` }
+    ] },
+
+  { id: "thermal-fluid-design", group: "Projects",
+    title: "Thermal-Fluid System Design", short: "Thermal-Fluid System Design",
+    role: "ME 4850 senior design course, five team projects",
+    img: "thermal-hero", hero: "thermal-overview", cap: "Testing the water wheel prototype",
+    figure: ["288 kW", "rack liquid-cooling loop"],
+    block: [["Course", "ME 4850"], ["Format", "5 team projects"], ["Team", "Team 2"], ["Tools", "MATLAB, EES, Fluent, Excel"]],
+    summary: "A senior design course that combines thermodynamics, fluid mechanics and heat transfer on real systems. Each project was a model-based design, simulated and optimized for thermal performance, pressure drop, efficiency, cost and sustainability, and delivered as a written report and presentation.",
+    stats: [["50 gpm", "full-scale water wheel"], ["2.0 kW", "per GPU cold plate"], ["288 kW", "rack liquid load"], ["50 kW", "Brayton heat source"]],
+    parts: [
+      { h: "1 · Overshot water wheel", figs: [["thermal-overview", "Testing the foam prototype"]], body: `
+        <ul><li>Built a physics model from mass, energy and torque balances that predicts shaft power and lift time against flow rate</li><li>Wrote a parametric MATLAB and Excel tool to optimize bucket volume and count within geometric and flow limits</li><li>Built a foam prototype, measured flow, shaft power and lift time, and validated the model against the data</li><li>Scaled the simulator to a full-size wheel handling up to 50 gpm</li></ul>
+        <a class="doc" href="https://drive.google.com/file/d/1vxynSauoHsYw0TUSVeq_wrZBuF7hk-Jl/view" target="_blank" rel="noopener">Read the Project 1 final report</a>` },
+      { h: "2 · Server liquid cooling", figs: [["thermal-p1-a", "Thermal resistance vs. flow rate, by pin width", "fit"], ["thermal-p1-b", "Pressure drop vs. flow rate, by pin width", "fit"]], body: `
+        <ul><li>Designed a direct-to-chip copper cold plate system for a 2U server dissipating up to 2.0 kW per GPU</li><li>Modeled cold plate resistance, NTU, pressure drop and coolant demand in MATLAB to hold lid temperature at or below 60 °C</li><li>Swept fin height, thickness and spacing, flow rate and inlet temperature under a 2 LPM per plate limit</li><li>Compared straight fins with square pin fins, evaluated loop losses and produced a P&amp;ID</li></ul>
+        <a class="doc" href="https://drive.google.com/file/d/1tuSog_bGSykQZuDU_aEvqjbHC9JB-B1I/view" target="_blank" rel="noopener">Read the Project 2 final report</a>` },
+      { h: "3 · Data center rack cooling", figs: [["thermal-p2-a", "Heat exchanger pressure drop vs. plate count", "fit"], ["thermal-p2-b", "Heat exchanger pressure drop vs. flow rate", "fit"]], body: `
+        <ul><li>Scaled up to an 18-server rack modeled on the NVIDIA GB200 NVL72, with 288 kW liquid-cooled and 57.6 kW air-cooled loads</li><li>Sized manifolds, hoses and quick-disconnects and built the system impedance curve</li><li>Designed the coolant distribution unit: a brazed plate heat exchanger by effectiveness-NTU, a pump matched to the system curve, and a buffer tank</li><li>Delivered a full P&amp;ID and bill of materials</li></ul>
+        <a class="doc" href="https://drive.google.com/file/d/1tvEdIJ-w-hfQlOUDd01O8sQoexOe6UGA/view" target="_blank" rel="noopener">Read the Project 3 final report</a>` },
+      { h: "4 · Deep space probe power", figs: [["thermal-p3", "T-s and P-h diagrams of the cycle", "fit"], ["thermal-hero", "Turbomachinery flow visualization", "fit"]], body: `
+        <ul><li>Preliminary design of a Brayton cycle power system for a probe too far out for solar power</li><li>50 kW heat source, packaged inside a 2 m spherical envelope</li><li>Built the cycle model in EES with a counterflow recuperator, two-stage intercooled compression and a radiator sized for vacuum</li><li>Swept mass flow, pressure ratio, turbine inlet temperature and recuperator effectiveness, and reported electrical output, back-work ratio and efficiency</li></ul>
+        <a class="doc" href="https://drive.google.com/file/d/1G2e4lhvA_lBB9rGuvOi0jaq2_OO3kWHZ/view" target="_blank" rel="noopener">Read the Project 4 final report</a>` },
+      { h: "5 · Solar thermal energy storage", figs: [["thermal-p4-a", "Packed bed temperature by depth, every 30 minutes", "fit"], ["thermal-p4-b", "R134a P-h diagram", "fit"]], body: `
+        <ul><li>Stores daytime solar heat to warm a building at night</li><li>Five 10 m parabolic troughs in parallel boil R134a and charge a packed bed over a six-hour window</li><li>Sized the bed of 25 mm quartzite pellets so its coldest point reaches at least 50 °C after six hours</li><li>Modeled the transient bed response and plotted top, middle and bottom temperatures every 30 minutes</li></ul>
+        <a class="doc" href="https://drive.google.com/file/d/1MSVSFS-Zn7cdNXHueWBjPMD270J8PnGW/view" target="_blank" rel="noopener">Read the Project 5 final report</a>` }
+    ] },
+
+  { id: "smartbeam", group: "Projects",
+    title: "SmartBeam", short: "SmartBeam",
+    role: "Project Engineer, instrumented I-beam",
+    img: "smartbeam-hero", hero: "smartbeam-hero", cap: "The team with the finished beam",
+    figure: ["850 lb", "transverse design load"],
+    block: [["Type", "Team design project"], ["Role", "Project Engineer"], ["Period", "Nov 2023 – Jan 2024"], ["Tools", "Strain gauges, Arduino"]],
+    summary: "An interdisciplinary team project to build a simply supported wooden I-beam that measures its own strain and estimates the applied load in real time. I led the structural design and strain gauge integration.",
+    stats: [["850 lb", "design load"], ["2-point", "hydraulic press test"]],
+    parts: [
+      { h: "Cross-sectional design", figs: [["smartbeam-overview", "Hand-drawn cross-section", "fit"]], body: `
+        <p>Hand calculations drove the geometry toward the largest moment of inertia for the material: material concentrated in the flanges and a thin web, then refined to balance stiffness, strength, material use and budget.</p>` },
+      { h: "Construction", figs: [["smartbeam-section", "Gluing and screwing the flanges"], ["banner-smartbeam", "Moving the finished beam"]], body: `
+        <p>Flanges and web were joined along their length with screws and wood glue, then clamped to hold alignment and even pressure while the glue cured. The goal was low cost and low material use without giving up structural integrity.</p>` },
+      { h: "Testing", figs: [["smartbeam-build", "Two-point loading in the hydraulic press"]], body: `
+        <p>We tested the beam in an industrial hydraulic press with two-point loading. An Arduino circuit read the strain gauges so we could watch strain rise in real time as the load increased, and we compared measured strain against theoretical flexural predictions.</p>` }
+    ] },
+
+  { id: "electron-composite-airframe", group: "Projects",
+    title: "Carbon Fiber Rocket Airframe", short: "Carbon Fiber Rocket Airframe",
+    role: "ME 7205 Composites, Electron-class launch vehicle",
+    img: "electron-8ply", hero: "electron-cad", cap: "CAD geometry used for the shell model",
+    figure: ["12 plies", "1.5 mm laminate passes Tsai-Hill"],
+    block: [["Course", "ME 7205, Fall 2026"], ["Status", "In progress"], ["Method", "Laminate theory + shell FEA"], ["Tools", "MATLAB, SolidWorks Simulation"]],
+    summary: "A semester composites project sizing the carbon fiber primary structure of a small orbital rocket, using Rocket Lab's Electron as the reference vehicle. I model the airframe as a thin-walled laminated shell, check SolidWorks shell FEA against classical laminate theory, and iterate the layup until every ply survives the combined launch loads. The final report is still to come.",
+    stats: [["18 × 1.2 m", "Electron reference geometry"], ["224 kN", "peak first-stage thrust"], ["≤ 7%", "FEA vs. hand calculations"], ["12 plies", "current laminate, 1.5 mm"]],
+    parts: [
+      { h: "Why a composite airframe", figs: [], body: `
+        <p>The primary structure is the load-bearing cylindrical shell that forms the rocket's skin and doubles as the propellant tank wall. Outside of propellant it is the largest mass on the vehicle, so every kilogram saved there goes almost directly into payload or margin.</p>
+        <p>It has to carry axial compression from thrust and drag, bending from wind shear and gusts, and heavy vibration at launch. Carbon fiber suits that load case because the fibers can be oriented ply by ply where the loads are, where a metal has to be sized for the worst direction everywhere. Rocket Lab and Firefly both report composite airframes up to 40% lighter than aluminum. The tradeoffs are real too: higher tooling and inspection cost, difficult repair, and cryogenic service, which is part of why SpaceX stayed with metal for Falcon 9 and Starship.</p>
+        <div class="table-wrap"><table class="spec"><thead><tr><th>Electron requirement</th><th>Value</th></tr></thead><tbody>
+          <tr><td>Natural frequency</td><td class="num">&gt; 30 Hz lateral, &gt; 40 Hz axial</td></tr>
+          <tr><td>Quasi-static acceleration</td><td class="num">−2 g to +8 g axial, ±2.5 g lateral</td></tr>
+          <tr><td>Lift-off mass</td><td class="num">≈ 13,000 kg</td></tr>
+          <tr><td>Nominal payload</td><td class="num">200 kg</td></tr>
+        </tbody></table></div>` },
+      { h: "Model and loads", figs: [], body: `
+        <p>The airframe is modeled as a thin-walled cylinder 18 m long with a 600 mm radius, fixed at the base just above the engines. Rocket Lab's laminate, tank geometry and loads are proprietary, so the plies are Hexcel IM7/8552 carbon/epoxy, a common aerospace prepreg, and every load is an engineering assumption built from published Electron data.</p>
+        <p>The starting layup is [90/±45/0]<sub>s</sub>: eight 0.125 mm plies for a 1 mm wall. The 0° plies carry axial compression and bending, ±45° carry torsion and shear, and 90° carry hoop stress from tank pressure. It is balanced and symmetric so the shell doesn't twist or warp under in-plane load.</p>
+        <div class="table-wrap"><table class="spec"><thead><tr><th>Load case</th><th>Value</th><th>Basis</th></tr></thead><tbody>
+          <tr><td>Axial compression</td><td class="num">224 kN</td><td>Peak first-stage thrust</td></tr>
+          <tr><td>Internal pressure</td><td class="num">35 psi</td><td>Assumed tank pressure</td></tr>
+          <tr><td>Torsion</td><td class="num">20 kN·m</td><td>Assumed</td></tr>
+          <tr><td>Bending</td><td class="num">100 kN·m</td><td>Assumed wind shear and gusts</td></tr>
+          <tr><td>Drag at Max-Q</td><td class="num">≈ 11.1 kN</td><td>q = 32.8 kPa, C<sub>D</sub> = 0.30</td></tr>
+        </tbody></table></div>
+        <p>At lift-off the thrust-to-weight ratio works out to 1.49, an initial acceleration of about 0.49 g, which matches Electron's published figure.</p>` },
+      { h: "Checking the FEA against laminate theory", figs: [["electron-abd", "ABD matrix of the 8-ply laminate, from MATLAB", "fit"], ["electron-axial", "Axial compression, 18.1 mm end shortening", "fit"], ["electron-pressure", "Internal pressure deformation", "fit"], ["electron-torsion", "Torsion, rim displacement at the free end", "wide fit"]], body: `
+        <p>Before trusting the FEA I built the laminate's ABD matrix in MATLAB and ran each load case by hand. Because the layup is symmetric, the coupling matrix B is zero, and the effective axial modulus of the wall comes out to 61.7 GPa.</p>
+        <div class="table-wrap"><table class="spec"><thead><tr><th>Load case</th><th>Quantity</th><th>Theory</th><th>FEA</th><th>Diff.</th></tr></thead><tbody>
+          <tr><td>Axial, 224 kN</td><td>End shortening</td><td class="num">17.3 mm</td><td class="num">18.1 mm</td><td class="num">+4.3%</td></tr>
+          <tr><td>Torsion, 20 kN·m</td><td>Rim displacement</td><td class="num">3.43 mm</td><td class="num">3.51 mm</td><td class="num">+2.4%</td></tr>
+          <tr><td>Pressure, 35 psi</td><td>Axial shortening</td><td class="num">13.9 mm</td><td class="num">13.0 mm</td><td class="num">−6.5%</td></tr>
+        </tbody></table></div>
+        <p>Three of the four cases agree within 7%, which supports using effective laminate properties from the A matrix instead of isotropic ones. The remaining gap is expected: the hand calculations ignore transverse shear and the stress concentration at the fixed base. The bending case isn't validated yet because I'm still working out the load application in SolidWorks.</p>` },
+      { h: "Sizing the laminate", figs: [["electron-8ply", "8 plies, 1 mm: 42.6 mm peak displacement", "fit"], ["electron-16ply", "16 plies, 2 mm: 20.4 mm", "fit"], ["electron-12ply", "12 plies, 1.5 mm: 22.1 mm", "fit"]], body: `
+        <p>With all four loads applied together, a Tsai-Hill check of every ply in MATLAB showed the 1 mm laminate wasn't enough: both 0° plies failed under axial compression. Doubling to 16 plies halved the deflection and passed every ply, so I swept ply counts from 10 to 16 to find the lightest layup that still passes.</p>
+        <div class="table-wrap"><table class="spec"><thead><tr><th>Layup</th><th>Wall</th><th>Peak Tsai-Hill index</th><th>Peak displacement</th></tr></thead><tbody>
+          <tr><td>[90/±45/0]<sub>s</sub>, 8 plies</td><td class="num">1.0 mm</td><td class="num">1.25, fails</td><td class="num">42.6 mm</td></tr>
+          <tr><td>[90/±45/0]<sub>2s</sub>, 16 plies</td><td class="num">2.0 mm</td><td class="num">0.81</td><td class="num">20.4 mm</td></tr>
+          <tr><td>[±45/90/0/0/90]<sub>s</sub>, 12 plies</td><td class="num">1.5 mm</td><td class="num">0.85</td><td class="num">22.1 mm</td></tr>
+        </tbody></table></div>
+        <p>The 12-ply laminate passes with a quarter fewer plies than the 16-ply version, and therefore a quarter less wall mass, for nearly the same stiffness.</p>` },
+      { h: "What's next", figs: [], body: `
+        <ul><li><b>Buckling.</b> The part I'm least sure of. A slender, thin-walled pressure vessel is buckling-critical, and the current checks treat bending and pressure conservatively.</li><li><b>Boundary conditions.</b> Replace the fixed base with inertia relief, which is how a vehicle in free flight is actually supported.</li><li><b>Thermal.</b> Apply the cure cool-down directly and look at the gradient between cryogenic LOX inside and aerodynamic heating outside.</li><li><b>Vibration.</b> Run a modal analysis and keep the structure's frequencies away from the vehicle's control and thrust-oscillation frequencies.</li><li><b>Layup refinement.</b> Try ±30° and ±60° plies, thickness that tapers along the length since bending peaks at the base, and a sandwich core for buckling.</li></ul>
+        <p>I'm moving the next round of analysis to ANSYS. This page will be updated with the final report.</p>` }
+    ] },
+
+  { id: "beetlebot-competition", group: "Projects",
+    title: "BeetleBot Competition", short: "BeetleBot",
+    role: "Manufacturing Lead, 3 lb competition robot",
+    img: "beetlebot-shell", hero: "beetlebot-shell", cap: "The finished BeetleBot",
+    figure: ["1st", "in section, weight push"],
+    block: [["Type", "Team competition"], ["Role", "Manufacturing Lead"], ["Limit", "3 lb max"], ["Tools", "SolidWorks, press brake, FDM"]],
+    summary: "Teams of three or four designed and built a manually controlled robot under three pounds from school-supplied parts. I built and integrated the mechanical and electrical systems: printed parts, machined aluminum, dual motors, the battery pack and wiring.",
+    stats: [["1st", "weight push"], ["2nd", "maneuverability"], ["4th", "acceleration"], ["Round 3", "of 5"]],
+    parts: [
+      { h: "3D printed base plate", figs: [["beetlebot-intro", "Printed base plate"], ["beetlebot-hero", "Motors, battery and wiring installed"]], body: `
+        <p>Designed in SolidWorks as the robot's floor, with two round motor holders and a square battery holder. Printed at 40% infill to save weight while keeping it stiff.</p>` },
+      { h: "Aluminum armor shell", figs: [["banner-beetlebot-competition", "Shell drawing", "fit"], ["beetlebot-base", "Bent aluminum shell"]], body: `
+        <p>A two-piece shell from 1/8" aluminum sheet: measured, marked, cut on the bandsaw and bent on a press brake. The halves are joined with small machined L-brackets.</p>` },
+      { h: "Competition", figs: [["beetlebot-shell", "Competition day"]], body: `
+        <p>The finished robot had a Minion theme and was a crowd favorite. It placed 1st in its section for weight push, 2nd in maneuverability and 4th in acceleration, and reached round 3 of 5.</p>` }
+    ] },
+
+  { id: "spacex-dragon-model", group: "Projects",
+    title: "SpaceX Dragon Model", short: "SpaceX Dragon Model",
+    role: "Personal CAD project in SolidWorks",
+    img: "dragon-hero", hero: "dragon-hero", cap: "Dragon capsule, SolidWorks",
+    figure: ["Next", "full Falcon 9 assembly"],
+    block: [["Type", "Personal project"], ["Status", "In progress"], ["Next", "Falcon 9 + ANSYS"], ["Tools", "SolidWorks surfacing"]],
+    summary: "I modeled the Dragon capsule from public reference material to push my CAD skills on complex geometry, and to spend time on a spacecraft I admire.",
+    stats: [],
+    parts: [
+      { h: "What I learned", figs: [["dragon-hero", "Dragon capsule surface model", "fit"]], body: `
+        <ul><li>Surface modeling: revolve, loft, trim, knit, fill and extrude</li><li>Split lines and variable fillets</li><li>Body move and copy, and multi-body modeling</li><li>Better reference geometry and model organization</li></ul>` },
+      { h: "Next", figs: [], body: `
+        <p>A full Falcon 9 and Dragon assembly with both stages, the interstage and landing legs, followed by structural, thermal and aerodynamic analysis in ANSYS.</p>` }
+    ] }
+];
+
+const PROFILE = {
+  name: "Luke Gustafson",
+  email: "LukeG482@gmail.com",
+  school: "Villanova University",
+  degree: "B.S. Mechanical Engineering",
+  grad: "May 2027",
+  gpa: "3.91",
+  minors: "Aerospace Engineering, Business",
+  concentration: "Thermal-Fluid Systems",
+  home: "Brooklyn, NY",
+  interests: ["Propulsion", "Fiber composites", "Tooling"],
+  industries: ["Aerospace", "Defense", "Motorsports"],
+  bio: "I'm a senior in Mechanical Engineering at Villanova, minoring in Aerospace Engineering and Business with a concentration in Thermal-Fluid Systems. I'm most interested in aerospace, defense and motorsports, especially propulsion, fiber composites and tooling, and I do my best work in hands-on engineering environments."
+};
+
+const SKILLS = {
+  "CAD and simulation": [["SolidWorks","CAD, FEA, thermal, surface and multi-body modeling"],["ANSYS","Fluent CFD, structural, thermal"],["nTop","Implicit and parametric design (learning)"],["Creo","Fixture design"],["MATLAB","Laminate analysis, thermal and hydraulic models, parametric studies"],["EES","Cycle modeling, T-s and P-h diagrams"],["Aspire, Mastercam","CNC router toolpaths, CAM"],["Excel, Tableau","Analysis and visualization"]],
+  "Fabrication": [["Carbon fiber composites","Wet layup, vacuum bagging, resin infusion, post-processing, assembly"],["CNC routing","MDF and foam molds"],["Manual machining","Mill, lathe, bandsaw, press brake. Learning CNC mill"],["FDM and SLA printing","Setup, optimization, post-processing"],["Welding","MIG, TIG, stick (beginner)"],["Electronics","Soldering, strain gauges, Arduino, servos"]]
+};
+
+// Resume, from the version on Luke's Google Site (summer 2026). Phone number deliberately left off the web.
+const RESUME = {
+  education: { school: "Villanova University, College of Engineering", when: "May 2027", where: "Villanova, PA",
+    lines: ["B.S. Mechanical Engineering, minors in Aerospace Engineering and Business", "GPA 3.91 / 4.0 · Dean's List (2023 – present) · Concentration in Thermal-Fluid Systems",
+      "Coursework: Thermal-Fluid System Design, Fluid Mechanics, Heat Transfer, Thermodynamics, Dynamics, Mechanics of Materials, Materials Science, Manufacturing Engineering, Statics, Circuits"] },
+  experience: [
+    { org: "Lockheed Martin, Missiles and Fire Control", role: "Manufacturing Engineering Intern", when: "Jun – Aug 2026", where: "Archbald, PA", link: "lockheed-martin",
+      points: ["Designed fixtures and tooling that cut riveting time 33%, torque application time 40% and soldering time 25%", "Developed a product washing rack that tripled load capacity"] },
+    { org: "Villanova Formula SAE, NovaRacing", role: "Aerodynamics Manufacturing Engineer", when: "Dec 2024 – present", where: "Villanova, PA", link: "formula-sae",
+      points: ["Manufactured and assembled 30+ carbon fiber components for the VU16 and VU17 aero packages using wet layup and resin infusion, managing the full workflow from mold prep to final assembly", "Programmed CNC toolpaths in Aspire and ran the router through full production of MDF molds", "Developed VU17 front wing concepts in SolidWorks, refined from CFD toward a 2,000 N total downforce target", "Designed and simulated the steering wheel, chassis rocker and sprocket in SolidWorks and ANSYS"] },
+    { org: "Formula SAE Aerodynamic Package Redesign", role: "Preliminary Design Phase", when: "Mar 2026 – present", where: "Villanova, PA", link: "formula-sae",
+      points: ["Proposed integrating nTop to replace a fragmented SolidWorks-to-ANSYS/Star-CCM+ pipeline with parametric geometry sweeps", "Planning a ground-up VU18 aero redesign for the 2027 FSAE rule changes"] },
+    { org: "Villanova University, College of Engineering", role: "Bio-Inspired Robotics Hardware Research Assistant", when: "Aug 2025 – Jan 2026", where: "Villanova, PA", link: "bio-inspired-robotics",
+      points: ["Fabricated and tested the mechanical assemblies of 5 bio-inspired snake jaw mechanisms", "Wrote the replication manual's mechanical procedures in Overleaf", "Deployed the robots in classrooms to evaluate interactive robotics in STEM learning"] },
+    { org: "Smart Beam Structural and Instrumentation Project", role: "Project Engineer", when: "Nov 2023 – Jan 2024", where: "Villanova, PA", link: "smartbeam",
+      points: ["Designed a simply supported wooden I-beam for an 850 lb transverse load", "Instrumented it with an Arduino strain gauge system to measure strain and load in real time"] }
+  ],
+  leadership: [
+    { org: "Delta Chi Fraternity", role: "Recruitment Chair", when: "Aug 2024 – May 2026", where: "Villanova, PA",
+      points: ["Recruited 28 new members in a month-long campaign, growing the chapter 35%", "Mentored underclass engineering students in Statics, Dynamics and Physics"] }
+  ]
+};
+
+const IMG_META = {"banner-beetlebot-competition":[1.2914,"#dfdfd5","#e5e5db","#e4e4da","#e4e4da"],"banner-bio-inspired-robotics":[1.0,"#2b2a2b","#201e1d","#181818","#272727"],"banner-feasimulations":[2.1477,"#2a2a2a","#4d4d4e","#404d40","#313131"],"banner-formula-sae":[1.5009,"#d1dbea","#a89f93","#a5a29b","#958e85"],"banner-home":[4.0,"#cdbc9c","#53453d","#2e3234","#89735d"],"banner-lockheed-martin":[1.2729,"#416c92","#6f889c","#7a97af","#85a0b3"],"banner-resume":[1.5209,"#55524c","#60574c","#4e4843","#4e4b47"],"banner-skills":[1.3333,"#808071","#314b76","#877d69","#3d4a5d"],"banner-smartbeam":[1.3333,"#a2a2a3","#a49e94","#bcb2ae","#988781"],"banner-spacex-dragon-model":[2.6667,"#2a3035","#21252e","#090d13","#53585f"],"banner-thermal-fluid-design":[1.5,"#213757","#83818d","#405a7d","#5a779c"],"beetlebot-base":[0.986,"#585143","#75716d","#a09d93","#847e7a"],"beetlebot-hero":[0.9938,"#6b5f49","#928574","#a5947f","#5a5141"],"beetlebot-intro":[0.9891,"#9b989d","#dfc09d","#9fb1b5","#d8a697"],"beetlebot-shell":[0.9813,"#ab8771","#a89a89","#c0b5a5","#9a8b7a"],"bio-hero":[0.7283,"#bcbcb9","#d3cfc6","#b1b0ab","#b4b0a9"],"bio-jaw":[1.2173,"#454344","#34302b","#3f3933","#3e3834"],"bio-quadrate":[1.2165,"#d0c8be","#544e4a","#887e75","#a9a19c"],"dragon-hero":[0.9371,"#ffffff","#ffffff","#ffffff","#ffffff"],"electron-12ply":[0.7443,"#ffffff","#fdfdfd","#ffffff","#ffffff"],"electron-16ply":[0.8109,"#fefefe","#ffffff","#ffffff","#ffffff"],"electron-8ply":[0.8463,"#fffffe","#ffffff","#fffffe","#ffffff"],"electron-abd":[0.8773,"#fdfdfd","#ffffff","#ffffff","#ffffff"],"electron-axial":[1.1109,"#ffffff","#ffffff","#fffffe","#ffffff"],"electron-cad":[1.2171,"#ffffff","#ffffff","#ffffff","#ffffff"],"electron-pressure":[0.7559,"#fffefe","#f6f8f9","#fbfcfb","#ffffff"],"electron-torsion":[1.3708,"#fcfcfc","#e3c3a8","#e9c8b5","#fefefe"],"fea-beam":[1.3678,"#2f2f2f","#2c2c2c","#2a2a2a","#252525"],"fea-griddle-cad":[1.7563,"#353535","#3f3f3f","#415041","#424242"],"fea-griddle":[1.7794,"#eff0f5","#fdfdfd","#eff1f5","#e1e4ed"],"fea-hero":[1.2255,"#acabad","#cac3c6","#cfc3c0","#9f9ea1"],"fea-stiffness":[1.358,"#2b2c2f","#444444","#4c4344","#454545"],"fea-thermal-1":[1.2843,"#ffffff","#ffffff","#fefcfc","#ffffff"],"fea-thermal-2":[17.7778,"#a1a1a1","#5a5a5a","#e1e1e1","#e6e7e7"],"fsae-cfd-2":[1.0694,"#303030","#383838","#415141","#505050"],"fsae-cfd":[1.0646,"#2e2e2e","#383838","#465b46","#505050"],"fsae-cnc":[0.94,"#524d50","#6d6968","#655f61","#625c5e"],"fsae-foam-core":[1.5474,"#a2b3a2","#0c0e13","#484b48","#424649"],"fsae-fw-assembly":[1.3776,"#8d7e6f","#60554f","#393133","#5d5149"],"fsae-fw-layup":[0.6626,"#bcb1ac","#473345","#978c8d","#2b2a34"],"fsae-hero":[0.9808,"#4979b1","#0a2a48","#57595c","#2f3744"],"fsae-layup":[1.5311,"#666a77","#989091","#6a6668","#7c797a"],"fsae-mdf":[1.1845,"#b4bdd6","#a1a09f","#a7a2a4","#bdc2cb"],"fsae-mold-prep":[1.1834,"#8b888c","#595b55","#414344","#7b7070"],"fsae-post":[1.3746,"#707382","#242025","#625b58","#746f6e"],"fsae-rocker-1":[1.1581,"#ebedf3","#efefef","#edeef3","#e7e9f1"],"fsae-rocker-2":[1.1605,"#323232","#3a3a3a","#363d36","#525252"],"fsae-rocker-3":[1.1596,"#333333","#3b3b3b","#3d493d","#525252"],"fsae-rocker-4":[1.3399,"#eceef4","#f2f3f4","#f2f4f7","#e4e6ec"],"fsae-rw-assembly":[1.1241,"#534e4f","#a59f9d","#887f7f","#968e87"],"fsae-shroud":[1.2691,"#cdcac0","#59473f","#7b746f","#878477"],"fsae-sprocket":[0.9847,"#f2f3f7","#e6e6e6","#f0f0f4","#e9ebf2"],"fsae-steering":[1.4363,"#dbdbd0","#e4e4d9","#dfdfd5","#dfdfd5"],"fsae-toolpath":[0.9366,"#b9b1ae","#7d6c63","#a18d7d","#936e70"],"fsae-undertray":[1.1246,"#9c9ca3","#7c7472","#64636b","#656066"],"fsae-vu16-fw-2":[0.89,"#665d52","#413a2f","#625750","#57544e"],"fsae-vu16-fw":[0.9014,"#94856d","#5d6995","#4e5886","#858896"],"fsae-vu16-rw":[1.2249,"#868e8e","#928572","#5b5c69","#5d534f"],"fsae-vu16":[1.2327,"#b8bdba","#616662","#686b67","#81837e"],"fsae-vu17-fw-cad-2":[2.1483,"#9e9fa5","#d4d3d0","#a9a7a5","#a4abb2"],"fsae-vu17-fw-cad":[2.623,"#e5e5e5","#fcfcfc","#e2e2e2","#ebebeb"],"fsae-vu17":[0.7836,"#776153","#829bb5","#635d50","#bbb6b2"],"home-bio":[1.0423,"#29292a","#1e1d1c","#151516","#272727"],"home-fsae":[1.0549,"#b0b0b9","#7d7472","#6a6871","#666268"],"home-lockheed":[1.0418,"#302f2d","#2f2625","#605c58","#5c5853"],"home-portrait":[0.9342,"#e7ebee","#696565","#858372","#909088"],"home-skills":[0.9807,"#ffffff","#f1f1f1","#ffffff","#ffffff"],"home-smartbeam":[0.723,"#bfb5b0","#7a7463","#ada495","#857d73"],"home-thermal":[1.2261,"#dedede","#dfdfdf","#f5f5f5","#e1e1e1"],"lockheed-hero":[0.9451,"#312f2e","#2e2524","#68635f","#5d5753"],"resume":[0.7762,"#fdfdfd","#fdfdfd","#fefffe","#ffffff"],"skill-3d-printing":[0.8526,"#e1e1e1","#ebebeb","#dcdcdc","#e3e3e3"],"skill-ansys":[0.8282,"#fdfdfd","#fefefe","#fefefe","#f7fafd"],"skill-aspire":[1.2105,"#fdfefe","#e96f82","#ffffff","#fefefe"],"skill-cnc-routing":[0.8929,"#fdfdfd","#fcfdfc","#c0c0c1","#a6bbac"],"skill-composites":[1.2939,"#646464","#171717","#1f1f1f","#242424"],"skill-excel":[0.8199,"#ffffff","#ffffff","#9ccdb6","#fefeff"],"skill-machining":[1.2186,"#fefefe","#c2dbea","#ffffff","#ffffff"],"skill-mastercam":[0.8146,"#ffffff","#ffffff","#f8e1e6","#fbecf0"],"skill-matlab":[0.8225,"#ffffff","#fdfaf1","#f3fcfd","#f4bec1"],"skill-solidworks":[0.8537,"#ffffff","#fefefe","#ec7c6d","#cd8379"],"skill-tableau":[0.8162,"#fbfcfc","#f8f8fc","#e7e0dc","#dde2f1"],"skill-welding":[0.7433,"#1d1919","#2e2e38","#202228","#322e30"],"skills-hero":[1.3333,"#808071","#314b76","#877d69","#3d4a5d"],"smartbeam-build":[1.0,"#6b594b","#67645b","#89857c","#9c897c"],"smartbeam-hero":[1.1013,"#c5bfb6","#968c75","#68655e","#aca58e"],"smartbeam-overview":[1.0,"#c0bdb4","#7f7c75","#9a978d","#b5b1a8"],"smartbeam-section":[1.0,"#9e9787","#7e7560","#afa696","#8a866a"],"thermal-hero":[1.4311,"#ffffff","#fafbfb","#f9f9f9","#f8f6f6"],"thermal-overview":[0.7633,"#50524a","#54514f","#474646","#79776f"],"thermal-p1-a":[1.2649,"#cecece","#cacaca","#e0e0e0","#e1e1e1"],"thermal-p1-b":[1.2216,"#cecece","#c7c7c7","#ececec","#ebeae9"],"thermal-p2-a":[1.0911,"#f1f1f1","#fefefe","#eaeaea","#fdfdfd"],"thermal-p2-b":[1.0697,"#e1e1e1","#fefefe","#f6f6f6","#eaeaea"],"thermal-p3":[0.6462,"#eae9ea","#ffffff","#efeeee","#ededed"],"thermal-p4-a":[1.3221,"#222220","#2d2d2b","#242522","#211f1e"],"thermal-p4-b":[1.3786,"#e4e3e4","#edebec","#e6e4e5","#eeeced"]};
+
+</script>
+<script>
+const IMG = f => `images/${f}.jpg`;
+const RATIO = f => (IMG_META[f] || [4 / 3])[0];
+// A frame at the photo's own shape. Given a slot shape, it crops only a sliver;
+// a photo that differs more is shown whole, mounted on a white plate.
+const frame = (f, alt, slot, cls = "") => {
+  const r = RATIO(f);
+  let style = `aspect-ratio:${slot || r}`;
+  if (slot && Math.abs(Math.log(r / slot)) > 0.1) {
+    cls += " whole";
+  }
+  return `<div class="frame ${cls}" style="${style}" data-alt="${alt}"><img src="${IMG(f)}" alt="${alt}" loading="lazy"></div>`;
+};
+// opts: "wide" puts the figure on its own row, "fit" (charts, CAD) sits on white.
+const fig = (f, cap, opts = "") =>
+  `<figure style="--r:${RATIO(f)}">${frame(f, cap, 0, opts.includes("fit") ? "fit" : "")}<figcaption>${cap}</figcaption></figure>`;
+// Figures in rows of up to three; a wide landscape figure takes a row to itself.
+const split = n => n <= 3 ? [n] : n === 4 ? [2, 2] : [3, ...split(n - 3)];
+function figRows(figs) {
+  const rows = [], run = [];
+  const flush = () => { let i = 0; for (const k of split(run.length)) { rows.push(run.slice(i, i + k)); i += k; } run.length = 0; };
+  for (const f of figs) { if ((f[2] || "").includes("wide") && RATIO(f[0]) >= 1.2) { if (run.length) flush(); rows.push([f]); } else run.push(f); }
+  if (run.length) flush();
+  return `<div class="frows">${rows.map(r => `<div class="frow">${r.map(f => fig(...f)).join("")}</div>`).join("")}</div>`;
+}
+
+const GROUPS = ["Experience", "Projects"];
+
+function renderHomeExtras() {
+  document.getElementById("skills-grid").innerHTML = Object.entries(SKILLS).map(([g, items]) =>
+    `<div><h3>${g}</h3><ul class="skill-list">${items.map(([n, d]) => `<li><b>${n}</b><span>${d}</span></li>`).join("")}</ul></div>`).join("");
+  const entry = e => `<div class="entry"><div><b>${e.org}</b><div class="role">${e.role}</div></div><div class="when">${e.when}<br>${e.where}</div>
+    ${e.points ? `<ul>${e.points.map(x => `<li>${x}</li>`).join("")}</ul>` : ""}${e.link ? `<a class="more" href="#${e.link}">See the project →</a>` : ""}</div>`;
+  const ed = RESUME.education;
+  document.getElementById("cv").innerHTML =
+    `<h3>Education</h3><div class="entries"><div class="entry"><div><b>${ed.school}</b><div class="role">${ed.lines[0]}</div></div><div class="when">${ed.when}<br>${ed.where}</div><ul>${ed.lines.slice(1).map(x => `<li>${x}</li>`).join("")}</ul></div></div>
+     <h3>Engineering experience</h3><div class="entries">${RESUME.experience.map(entry).join("")}</div>
+     <h3>Leadership</h3><div class="entries">${RESUME.leadership.map(entry).join("")}</div>`;
+}
+
+function renderIndex() {
+  const n = g => PROJECTS.filter(p => p.group === g).length;
+  document.getElementById("work-count").textContent = `${n("Experience")} roles · ${n("Projects")} projects`;
+  document.getElementById("index").innerHTML = GROUPS.map(g => {
+    const items = PROJECTS.filter(p => p.group === g);
+    return `<div class="group"><span class="label">${g}</span><div class="cards">${items.map(p => `
+      <a class="card" href="#${p.id}">
+        ${frame(p.img, p.cap, 1)}
+        <div><h3>${p.title}</h3><p class="role">${p.role}</p></div>
+        <div class="fig"><b>${p.figure[0]}</b><span>${p.figure[1]}</span></div>
+      </a>`).join("")}</div></div>`;
+  }).join("");
+}
+
+function renderProject(p) {
+  const i = PROJECTS.indexOf(p), prev = PROJECTS[(i - 1 + PROJECTS.length) % PROJECTS.length], next = PROJECTS[(i + 1) % PROJECTS.length];
+
+  const hero = p.hero || p.img, side = RATIO(hero) < 1.3;
+  return `
+  <div class="wrap enter">
+    <div class="sheet-top ${side ? "side" : ""}">
+    <div class="sheet-head">
+      <a class="crumb" href="#work">← All work</a>
+      <h1>${p.title}</h1>
+      <p class="summary">${p.summary}</p>
+      <div class="titleblock">${p.block.map(([k, v]) => `<div><span class="label">${k}</span><b>${v}</b></div>`).join("")}</div>
+    </div>
+    <figure class="hero-fig" style="--r:${RATIO(hero)}">${frame(hero, p.cap)}<figcaption>${p.cap}</figcaption></figure>
+    </div>
+    ${p.stats.length ? `<div class="stats">${p.stats.map(([b, s]) => `<div><b>${b}</b><span>${s}</span></div>`).join("")}</div>` : ""}
+    <div>${p.parts.map(s => ({ ...s, figs: s.figs.filter(f => f[0] !== hero) })).map(s => `
+      <div class="part ${s.figs.length ? "" : "nofig"}">
+        <div class="text"><h2>${s.h}</h2>${s.body}</div>
+        ${s.figs.length ? figRows(s.figs) : ""}
+      </div>`).join("")}</div>
+    <nav class="pager" aria-label="More work">
+      <a href="#${prev.id}"><span class="label">Previous</span><b>${prev.short}</b></a>
+      <a href="#${next.id}"><span class="label">Next</span><b>${next.short}</b></a>
+    </nav>
+  </div>`;
+}
+
+// A frame whose photo is not on disk yet shows a hatched placeholder with its caption.
+function watchImages(root) {
+  root.querySelectorAll(".frame img").forEach(img => {
+    const mark = () => img.closest(".frame").classList.add("missing");
+    if (img.complete && img.naturalWidth === 0) mark(); else img.addEventListener("error", mark, { once: true });
+  });
+}
+
+const home = document.getElementById("home"), project = document.getElementById("project");
+function route() {
+  const id = location.hash.slice(1);
+  const p = PROJECTS.find(x => x.id === id);
+  if (p) {
+    project.innerHTML = renderProject(p);
+    watchImages(project);
+    home.hidden = true; project.hidden = false;
+    document.title = `${p.title} · Luke Gustafson`;
+    window.scrollTo(0, 0);
+  } else {
+    const wasProject = !project.hidden;
+    home.hidden = false; project.hidden = true;
+    document.title = "Luke Gustafson Portfolio";
+    if (wasProject) {
+      const el = id && document.getElementById(id);
+      requestAnimationFrame(() => el ? el.scrollIntoView() : window.scrollTo(0, 0));
+    }
+  }
+}
+renderIndex();
+renderHomeExtras();
+watchImages(document);
+window.addEventListener("hashchange", route);
+route();
+
+const lb = document.getElementById("lightbox");
+project.addEventListener("click", e => {
+  const img = e.target.closest(".frame")?.querySelector("img");
+  if (!img || img.closest(".frame").classList.contains("missing")) return;
+  lb.querySelector("img").src = img.src; lb.querySelector("img").alt = img.alt;
+  lb.querySelector("p").textContent = img.alt; lb.hidden = false;
+});
+lb.addEventListener("click", () => lb.hidden = true);
+addEventListener("keydown", e => { if (e.key === "Escape") lb.hidden = true; });
+addEventListener("hashchange", () => lb.hidden = true);
+
+document.getElementById("copy").addEventListener("click", e => {
+  const btn = e.currentTarget, text = document.getElementById("email").textContent;
+  const done = () => { btn.textContent = "Copied"; setTimeout(() => btn.textContent = "Copy email", 1800); };
+  navigator.clipboard?.writeText(text).then(done, () => {
+    const r = document.createRange(); r.selectNodeContents(document.getElementById("email"));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected";
+  });
+});
+</script>
+
+</body>
+</html>
