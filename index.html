@@ -418,23 +418,6 @@ const PROJECTS = [
         <a class="doc" href="https://drive.google.com/file/d/1MSVSFS-Zn7cdNXHueWBjPMD270J8PnGW/view" target="_blank" rel="noopener">Read the Project 5 final report</a>` }
     ] },
 
-  { id: "smartbeam", group: "Projects",
-    title: "SmartBeam", short: "SmartBeam",
-    role: "Project Engineer, instrumented I-beam",
-    img: "smartbeam-hero", hero: "smartbeam-hero", cap: "The team with the finished beam",
-    figure: ["850 lb", "transverse design load"],
-    block: [["Type", "Team design project"], ["Role", "Project Engineer"], ["Period", "Nov 2023 – Jan 2024"], ["Tools", "Strain gauges, Arduino"]],
-    summary: "An interdisciplinary team project to build a simply supported wooden I-beam that measures its own strain and estimates the applied load in real time. I led the structural design and strain gauge integration.",
-    stats: [["850 lb", "design load"], ["2-point", "hydraulic press test"]],
-    parts: [
-      { h: "Cross-sectional design", figs: [["smartbeam-overview", "Hand-drawn cross-section", "fit"]], body: `
-        <p>Hand calculations drove the geometry toward the largest moment of inertia for the material: material concentrated in the flanges and a thin web, then refined to balance stiffness, strength, material use and budget.</p>` },
-      { h: "Construction", figs: [["smartbeam-section", "Gluing and screwing the flanges"], ["banner-smartbeam", "Moving the finished beam"]], body: `
-        <p>Flanges and web were joined along their length with screws and wood glue, then clamped to hold alignment and even pressure while the glue cured. The goal was low cost and low material use without giving up structural integrity.</p>` },
-      { h: "Testing", figs: [["smartbeam-build", "Two-point loading in the hydraulic press"]], body: `
-        <p>We tested the beam in an industrial hydraulic press with two-point loading. An Arduino circuit read the strain gauges so we could watch strain rise in real time as the load increased, and we compared measured strain against theoretical flexural predictions.</p>` }
-    ] },
-
   { id: "electron-composite-airframe", group: "Projects",
     title: "Carbon Fiber Rocket Airframe", short: "Carbon Fiber Rocket Airframe",
     role: "ME 7205 Composites, Electron-class launch vehicle",
@@ -483,6 +466,23 @@ const PROJECTS = [
       { h: "What's next", figs: [], body: `
         <ul><li><b>Buckling.</b> The part I'm least sure of. A slender, thin-walled pressure vessel is buckling-critical, and the current checks treat bending and pressure conservatively.</li><li><b>Boundary conditions.</b> Replace the fixed base with inertia relief, which is how a vehicle in free flight is actually supported.</li><li><b>Thermal.</b> Apply the cure cool-down directly and look at the gradient between cryogenic LOX inside and aerodynamic heating outside.</li><li><b>Vibration.</b> Run a modal analysis and keep the structure's frequencies away from the vehicle's control and thrust-oscillation frequencies.</li><li><b>Layup refinement.</b> Try ±30° and ±60° plies, thickness that tapers along the length since bending peaks at the base, and a sandwich core for buckling.</li></ul>
         <p>I'm moving the next round of analysis to ANSYS. This page will be updated with the final report.</p>` }
+    ] },
+
+  { id: "smartbeam", group: "Projects",
+    title: "SmartBeam", short: "SmartBeam",
+    role: "Project Engineer, instrumented I-beam",
+    img: "smartbeam-hero", hero: "smartbeam-hero", cap: "The team with the finished beam",
+    figure: ["850 lb", "transverse design load"],
+    block: [["Type", "Team design project"], ["Role", "Project Engineer"], ["Period", "Nov 2023 – Jan 2024"], ["Tools", "Strain gauges, Arduino"]],
+    summary: "An interdisciplinary team project to build a simply supported wooden I-beam that measures its own strain and estimates the applied load in real time. I led the structural design and strain gauge integration.",
+    stats: [["850 lb", "design load"], ["2-point", "hydraulic press test"]],
+    parts: [
+      { h: "Cross-sectional design", figs: [["smartbeam-overview", "Hand-drawn cross-section", "fit"]], body: `
+        <p>Hand calculations drove the geometry toward the largest moment of inertia for the material: material concentrated in the flanges and a thin web, then refined to balance stiffness, strength, material use and budget.</p>` },
+      { h: "Construction", figs: [["smartbeam-section", "Gluing and screwing the flanges"], ["banner-smartbeam", "Moving the finished beam"]], body: `
+        <p>Flanges and web were joined along their length with screws and wood glue, then clamped to hold alignment and even pressure while the glue cured. The goal was low cost and low material use without giving up structural integrity.</p>` },
+      { h: "Testing", figs: [["smartbeam-build", "Two-point loading in the hydraulic press"]], body: `
+        <p>We tested the beam in an industrial hydraulic press with two-point loading. An Arduino circuit read the strain gauges so we could watch strain rise in real time as the load increased, and we compared measured strain against theoretical flexural predictions.</p>` }
     ] },
 
   { id: "beetlebot-competition", group: "Projects",
